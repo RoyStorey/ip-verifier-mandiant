@@ -44,8 +44,8 @@ function MinifiedReportList(data) {
       return (
         <Link key={report.uid} to={`/report/${report.uid}`}>
           <div className="report" key={index}>
-            <p>{formatDate(report.dateofreport)}</p>
-            <p className="report-name">{report.reportname}</p>
+            <p>{formatDate(report.date)}</p>
+            <p className="report-name">{report.name}</p>
           </div>
         </Link>
       );

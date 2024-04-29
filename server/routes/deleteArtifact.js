@@ -1,17 +1,18 @@
 import postgreSQLClient from "../postgres.js";
 
-const getIp = async (req, res) => {
+const deleteArtifact = async (req, res) => {
   const client = await postgreSQLClient.connect();
-  const { ip } = req.query;
+  const { uid } = req.body;
+
+  console.log("artifact being deleted");
 
   try {
     const query = `
-    SELECT *
-    FROM ips
-    WHERE ip = $1
+    DELETE FROM artifacts
+    WHERE uid = $1
   `;
 
-    const { rows } = await client.query(query, [ip]);
+    const { rows } = await client.query(query, [uid]);
 
     client.release();
     res.json(rows);
@@ -23,6 +24,4 @@ const getIp = async (req, res) => {
   }
 };
 
-// console.log(await getIp({ query: { ip: "8.8.8.8" } }));
-
-export default getIp;
+export default deleteIp;

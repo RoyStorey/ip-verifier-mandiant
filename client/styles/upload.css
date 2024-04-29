@@ -17,7 +17,7 @@
 }
 
 .file-upload-container {
-  background-color: #d8dfe4;
+  background-color: hsl(207, 18%, 25%);
   display: flex;
   align-items: center;
 }
@@ -35,7 +35,7 @@
   display: none;
 }
 .file-upload-container label:hover {
-  color: #f3fafa;
+  color: hsl(207, 18%, 10%);
   background-color: #98c1d9;
   cursor: pointer;
 }
@@ -51,7 +51,7 @@
 
 button:hover {
   background-color: #98c1d9;
-  color: #f3fafa;
+  color: hsl(207, 18%, 10%);
   cursor: pointer;
 }
 

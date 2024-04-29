@@ -1,16 +1,16 @@
-// $darkest: hsl(207, 18%, 5%);
-// $darker: hsl(207, 18%, 22%);
-// $dark: #636f7e;
-// $light: #d8dfe4;
-// $lighter: #f3fafa;
-// $highlight: #98c1d9;
-
-$darkest: #fcffff;
-$darker: #d8dfe4;
+$darkest: hsl(207, 18%, 10%);
+$darker: hsl(207, 18%, 25%);
 $dark: #636f7e;
-$light: hsl(207, 18%, 22%);
-$lighter: hsl(207, 18%, 5%);
+$light: #d8dfe4;
+$lighter: #f3fafa;
 $highlight: #98c1d9;
+
+// $darkest: #fcffff;
+// $darker: #d8dfe4;
+// $dark: #636f7e;
+// $light: hsl(207, 18%, 22%);
+// $lighter: hsl(207, 18%, 5%);
+// $highlight: #98c1d9;
 
 .navbar {
   top: 0px;
@@ -28,6 +28,7 @@ $highlight: #98c1d9;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   background-color: $darkest;
   // background: hsla(0, 0%, 100%, 0.04);
+  border-bottom: 1px solid $darker;
 
   .header-image-container {
     width: 25%;

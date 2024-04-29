@@ -12,8 +12,7 @@ function ListOfReports(reports) {
     () =>
       Object.keys(reports.reports).map((key) => ({
         ...reports.reports[key],
-        date: formatDate(reports.reports[key].dateofreport),
-        expiration: formatDate(reports.reports[key].expirationdate),
+        date: formatDate(reports.reports[key].date),
       })),
     [reports]
   );
@@ -33,19 +32,26 @@ function ListOfReports(reports) {
     () => [
       {
         Header: "Date",
-        accessor: "date", // accessor is the "key" in the data
+        accessor: "date",
       },
       {
         Header: "Report Name",
-        accessor: "reportname",
+        accessor: "name",
       },
       {
-        Header: "No. of Unique IPs Scanned",
-        accessor: "noofipsscanned",
+        Header: "# of Artifacts Scanned",
+        accessor: "artifacts.length",
       },
       {
-        Header: "Expiration",
-        accessor: "expirationdate",
+        Header: "Highest Mandiant Score",
+        accessor: "highest_mscore",
+        Cell: ({ value }) => {
+          const getColor = (score) => {
+            const hue = ((100 - score) * 120) / 100; // 0 is red, 120 is green
+            return `hsl(${hue}, 100%, 50%)`; // Fully saturated, moderate lightness
+          };
+          return <span style={{ color: getColor(value) }}>{value}</span>;
+        },
       },
       {
         Header: "Actions",
@@ -163,18 +169,6 @@ function ListOfReports(reports) {
       {Object.keys(reports).length === 0 && <div>No entries found.</div>}
     </>
   );
-}
-
-function getThreatLevel(riskScore) {
-  if (riskScore > 66) {
-    return "crit-threat";
-  } else if (riskScore > 33) {
-    return "high-threat";
-  } else if (riskScore > 1) {
-    return "mid-threat";
-  } else {
-    return "low-threat";
-  }
 }
 
 export default ListOfReports;

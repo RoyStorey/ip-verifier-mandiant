@@ -8,6 +8,7 @@
   margin-top: 9vh;
   flex-direction: column;
   padding-inline: 20vh;
+  height: 91vh;
 }
 
 h4 {
@@ -17,6 +18,7 @@ h4 {
 
 h1 {
   margin-bottom: 0px;
+  margin-right: 1rem;
 }
 
 button,
@@ -24,7 +26,7 @@ option,
 select {
   border: none;
   background: none;
-  color: hsl(207, 18%, 22%);
+  color: #d8dfe4;
   height: 100%;
 }
 
@@ -57,12 +59,11 @@ select {
 .go-to-page input {
   border: none;
   background: none;
-  color: black;
 }
 
 th {
   text-align: left;
-  border-bottom: 1px solid #d8dfe4;
+  border-bottom: 1px solid hsl(207, 18%, 25%);
   padding-left: 1rem;
 }
 
@@ -82,18 +83,20 @@ tr:nth-of-type(even) {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  background: #fcffff;
-  border: 1px solid #fcffff;
+  background: hsl(207, 18%, 10%);
+  border: 1px solid hsl(207, 18%, 10%);
   margin-bottom: 10vh;
   width: 100%;
   position: relative;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid hsl(207, 18%, 25%);
+  border-radius: 5px;
 }
 .ip-report a {
   text-decoration: none;
 }
 .ip-report .header {
-  background: #fcffff !important;
+  background: hsl(207, 18%, 10%) !important;
   position: sticky;
 }
 .ip-report .report {
@@ -103,7 +106,7 @@ tr:nth-of-type(even) {
   padding-inline: 4rem;
   box-sizing: border-box;
   transition-duration: 0.2s;
-  border-bottom: 1px solid #d8dfe4;
+  border-bottom: 1px solid hsl(207, 18%, 25%);
   height: 3rem;
 }
 .ip-report .report .report-name {
@@ -197,4 +200,11 @@ header :first-child {
   display: flex;
   flex-direction: column;
   align-items: start !important;
+}
+
+input {
+  background: none;
+  color: #d8dfe4;
+  border: none;
+  padding-inline: 1rem;
 }/*# sourceMappingURL=report-page.css.map */

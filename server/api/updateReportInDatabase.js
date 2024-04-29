@@ -5,7 +5,7 @@ const updateReportInDatabase = async (report) => {
   try {
     const query = `
       UPDATE reports
-      SET reportname = $2
+      SET name = $2
       WHERE uid = $1
       RETURNING uid;
     `;

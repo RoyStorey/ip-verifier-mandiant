@@ -1,30 +1,19 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ReportData from "../components/ReportData";
+// import ReportData from "../components/ReportData";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-// import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-
 import "../styles/report-page.css";
 import Footer from "../components/Footer";
-// import updateReport from "../../server/routes/updateReport";
+import ListOfArtifacts from "../components/ListOfArtifacts";
 
 const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
 const PORT = import.meta.env.VITE_PORT;
 
-function formatListOfIPs(text) {
-  if (text == undefined) {
-    console.log("text is undefined");
-  } else {
-    let items = text.slice(1, -1).split(",");
-    return items.map((item) => item.replace(/"/g, "").trim());
-  }
-}
-
-async function fetchReport(uid) {
+async function getReport(uid) {
   return axios
     .get(`http://${SERVER_HOST}:${PORT}/getReport`, {
       params: {
@@ -34,11 +23,12 @@ async function fetchReport(uid) {
     .then((response) => response.data)
     .catch((error) => console.error(error));
 }
-async function fetchIp(ip) {
+
+async function getArtifact(artifact_value) {
   return axios
-    .get(`http://${SERVER_HOST}:${PORT}/getIp`, {
+    .get(`http://${SERVER_HOST}:${PORT}/getArtifact`, {
       params: {
-        ip: ip,
+        artifact: artifact_value,
       },
     })
     .then((response) => response.data)
@@ -46,12 +36,12 @@ async function fetchIp(ip) {
 }
 
 export default function ReportPage() {
-  let { uid } = useParams();
-  const [ips, setIps] = useState([]);
+  const { uid } = useParams();
+  const [artifacts, setArtifacts] = useState([]);
   const [reportName, setReportName] = useState([]);
   const [rawReportData, setReportData] = useState([]);
 
-  const deleteReport = async (reportId) => {
+  async function deleteReport(reportId) {
     if (window.confirm("Are you sure you would like to delete this report?")) {
       try {
         await axios.post(`http://${SERVER_HOST}:${PORT}/deleteReport`, {
@@ -61,7 +51,7 @@ export default function ReportPage() {
         console.error(error);
       }
     }
-  };
+  }
 
   async function handleReportDelete(reportuid) {
     await deleteReport(reportuid);
@@ -84,22 +74,19 @@ export default function ReportPage() {
     }
   }
 
+  async function getListOfArtifactData(artifactList) {
+    let artifactData = [];
+    for (let i = 0; i < artifactList.length; i++) {
+      artifactData.push(await getArtifact(artifactList[i]));
+    }
+    return artifactData;
+  }
+
   useEffect(() => {
-    fetchReport(uid).then(async (data) => {
-      console.log(data);
-      setReportName(data.reportname);
+    getReport(uid).then(async (data) => {
+      setReportName(data.name);
       setReportData(data);
-      let listOfIPs = ["8.8.8.8"];
-      if (data != undefined) {
-        listOfIPs = formatListOfIPs(data.scannedips);
-      }
-      //This was ChatGPT. Don't @ me.
-      const listOfIPDataPromises = listOfIPs.map((ip) => fetchIp(ip));
-      const resolvedIPData = await Promise.all(listOfIPDataPromises);
-      const refinedIPData = resolvedIPData.map((array) => array[0]);
-      //end of ChatGPT.
-      setIps(refinedIPData);
-      console.log(refinedIPData);
+      setArtifacts(await getListOfArtifactData(data.artifacts));
     });
   }, []);
 
@@ -131,7 +118,8 @@ export default function ReportPage() {
         </header>
 
         <div className="ip-report">
-          <ReportData ips={ips} />
+          {/* <ReportData artifacts={artifacts} /> */}
+          <ListOfArtifacts artifacts={artifacts} />
         </div>
       </div>
       <Footer />

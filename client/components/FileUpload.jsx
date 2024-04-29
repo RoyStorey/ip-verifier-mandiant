@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { postIpAddresses } from "../functions/apifetch";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import "../styles/upload.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -81,10 +80,10 @@ const FileUpload = () => {
     return validIPs;
   }
 
-  async function postIpAddresses(ipAddresses) {
+  async function postArtifacts(artifacts) {
     return axios
       .post(`http://${SERVER_HOST}:${PORT}/handleFileUpload`, {
-        ips: ipAddresses,
+        artifacts: artifacts,
       })
       .then((response) => response.data)
       .catch((error) => console.error(error));
@@ -92,7 +91,7 @@ const FileUpload = () => {
 
   useEffect(() => {
     if (data.length != 0) {
-      postIpAddresses(validateIPs(data));
+      postArtifacts(validateIPs(data));
     } else {
       // console.error("no data");
       return;

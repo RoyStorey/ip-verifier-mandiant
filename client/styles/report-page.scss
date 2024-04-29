@@ -1,15 +1,16 @@
-// $darkest: hsl(207, 18%, 5%);
-// $darker: hsl(207, 18%, 22%);
-// $dark: #636f7e;
-// $light: #d8dfe4;
-// $lighter: #f3fafa;
-// $highlight: #98c1d9;
-$darkest: #fcffff;
-$darker: #d8dfe4;
+$darkest: hsl(207, 18%, 10%);
+$darker: hsl(207, 18%, 25%);
 $dark: #636f7e;
-$light: hsl(207, 18%, 22%);
-$lighter: hsl(207, 18%, 5%);
+$light: #d8dfe4;
+$lighter: #f3fafa;
 $highlight: #98c1d9;
+
+// $darkest: #fcffff;
+// $darker: #d8dfe4;
+// $dark: #636f7e;
+// $light: hsl(207, 18%, 22%);
+// $lighter: hsl(207, 18%, 5%);
+// $highlight: #98c1d9;
 
 .fa-icon {
   :hover {
@@ -23,6 +24,7 @@ $highlight: #98c1d9;
   margin-top: 9vh;
   flex-direction: column;
   padding-inline: 20vh;
+  height: 91vh;
 }
 h4 {
   margin: 0px;
@@ -30,6 +32,7 @@ h4 {
 }
 h1 {
   margin-bottom: 0px;
+  margin-right: 1rem;
 }
 button,
 option,
@@ -65,7 +68,7 @@ select {
   input {
     border: none;
     background: none;
-    color: black;
+    // color: black;
   }
 }
 th {
@@ -92,6 +95,8 @@ tr:nth-of-type(even) {
   width: 100%;
   position: relative;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid $darker;
+  border-radius: 5px;
 
   a {
     text-decoration: none;
@@ -201,4 +206,10 @@ header {
   display: flex;
   flex-direction: column;
   align-items: start !important;
+}
+input {
+  background: none;
+  color: $light;
+  border: none;
+  padding-inline: 1rem;
 }

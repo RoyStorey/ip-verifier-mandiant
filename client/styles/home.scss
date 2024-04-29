@@ -1,9 +1,15 @@
-$darkest: #fcffff;
-$darker: #d8dfe4;
+$darkest: hsl(207, 18%, 10%);
+$darker: hsl(207, 18%, 25%);
 $dark: #636f7e;
-$light: hsl(207, 18%, 22%);
-$lighter: hsl(207, 18%, 5%);
+$light: #d8dfe4;
+$lighter: #f3fafa;
 $highlight: #98c1d9;
+// $darkest: #fcffff;
+// $darker: #d8dfe4;
+// $dark: #636f7e;
+// $light: hsl(207, 18%, 22%);
+// $lighter: hsl(207, 18%, 5%);
+// $highlight: #98c1d9;
 
 .home-body {
   margin-top: 9vh;
@@ -35,8 +41,9 @@ $highlight: #98c1d9;
   flex-direction: column;
   overflow-y: scroll;
   background: $darkest;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  // border-radius: 0.5rem;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid $darker;
+  border-radius: 0.5rem;
   h3 {
     padding-left: 4rem;
   }

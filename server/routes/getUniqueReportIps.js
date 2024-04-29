@@ -1,13 +1,13 @@
 import postgreSQLClient from "../postgres.js";
 
-const getIpsByReport = async (req, res) => {
+const getArtifactsByReport = async (req, res) => {
   const client = await postgreSQLClient.connect();
   const { reportuid } = req.query;
 
   try {
     const query = `
     SELECT *
-    FROM ips
+    FROM artifacts
     WHERE reportuid = $1
     ORDER BY ip ASC;
   `;
@@ -24,4 +24,4 @@ const getIpsByReport = async (req, res) => {
   }
 };
 
-export default getIpsByReport;
+export default getArtifactsByReport;

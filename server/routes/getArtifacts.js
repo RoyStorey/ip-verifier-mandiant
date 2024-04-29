@@ -1,23 +1,22 @@
 import postgreSQLClient from "../postgres.js";
 
-const getIpFromDatabase = async (ip) => {
+async function getArtifacts(req, res) {
   const client = await postgreSQLClient.connect();
-
   try {
     const query = `
     SELECT *
-    FROM ips
-    WHERE ip = $1
+    FROM artifacts
+    ORDER BY date_scanned ASC
   `;
 
-    const { rows } = await client.query(query, [ip]);
+    const { rows } = await client.query(query);
 
+    res.json(rows);
     client.release();
-    return rows;
   } catch (error) {
     console.log(error);
     client.release();
   }
-};
+}
 
-export default getIpFromDatabase;
+export default getArtifacts;

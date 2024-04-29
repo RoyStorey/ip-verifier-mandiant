@@ -12,7 +12,7 @@ export default function Navbar() {
         <div className="header-image-container">
           <img src={AirForce} alt="US Air Force Logo" />
         </div>
-        <h2>IP Verification Tool</h2>
+        <h2>Bulk Artifact Analysis</h2>
         <div className="links">
           <Link className="link" to="/">
             <FontAwesomeIcon icon={faHome} />
@@ -22,7 +22,7 @@ export default function Navbar() {
             <FontAwesomeIcon icon={faFile} />
             Reports
           </Link>
-          <Link className="link" to="/all-ips">
+          <Link className="link" to="/all-artifacts">
             <FontAwesomeIcon icon={faList} />
             IPs
           </Link>

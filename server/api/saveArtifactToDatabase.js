@@ -1,0 +1,186 @@
+import postgreSQLClient from "../postgres.js";
+import { v4 as uuidv4 } from "uuid";
+
+const saveArtifactToDatabase = async (mandiantIpInfo) => {
+  const client = await postgreSQLClient.connect();
+  try {
+    const query = `
+    INSERT INTO artifacts
+       (uid,
+        type,
+        artifact,
+        id,
+        mscore,
+        sources,
+        misp,
+        last_updated,
+        first_seen,
+        last_seen,
+        date_scanned
+        ) 
+      values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+    RETURNING uid;
+    `;
+
+    const { rows } = await client.query(query, [
+      uuidv4(),
+      mandiantIpInfo.type,
+      mandiantIpInfo.value,
+      mandiantIpInfo.id,
+      mandiantIpInfo.mscore,
+      mandiantIpInfo.sources,
+      mandiantIpInfo.misp,
+      mandiantIpInfo.last_updated,
+      mandiantIpInfo.first_seen,
+      mandiantIpInfo.last_seen,
+      new Date(),
+    ]);
+    client.release();
+    return rows[0];
+    // }
+  } catch (error) {
+    console.log(error);
+    client.release();
+  }
+};
+
+export default saveArtifactToDatabase;
+
+// saveArtifactToDatabase({
+//   id: "ipv4--c1a3c62e-cf27-59bd-bb30-bf6feea68c6d",
+//   mscore: 58,
+//   type: "ipv4",
+//   value: "91.109.184.3",
+//   is_publishable: true,
+//   sources: [
+//     {
+//       first_seen: "2022-06-12T03:55:20.000+0000",
+//       last_seen: "2022-06-12T03:55:20.000+0000",
+//       osint: false,
+//       category: [],
+//       source_name: "Mandiant",
+//     },
+//     {
+//       first_seen: "2023-01-09T21:31:00.409+0000",
+//       last_seen: "2023-02-28T18:31:01.108+0000",
+//       osint: true,
+//       category: ["spam/sender", "spam"],
+//       source_name: "spamhaus_edrop",
+//     },
+//     {
+//       first_seen: "2023-07-04T04:50:41.000+0000",
+//       last_seen: "2023-07-06T04:45:56.000+0000",
+//       osint: false,
+//       category: [],
+//       source_name: "Mandiant",
+//     },
+//     {
+//       first_seen: "2021-06-09T23:34:03.628+0000",
+//       last_seen: "2021-06-09T23:34:03.628+0000",
+//       osint: true,
+//       category: [],
+//       source_name: "blocklist_net_ua",
+//     },
+//     {
+//       first_seen: "2022-06-12T03:54:40.000+0000",
+//       last_seen: "2022-06-12T03:54:40.000+0000",
+//       osint: false,
+//       category: [],
+//       source_name: "Mandiant",
+//     },
+//   ],
+//   misp: {
+//     akamai: false,
+//     alexa: false,
+//     "amazon-aws": false,
+//     apple: false,
+//     "automated-malware-analysis": false,
+//     "bank-website": false,
+//     "captive-portals": false,
+//     "censys-scanning": false,
+//     cisco_1M: false,
+//     cisco_top1000: false,
+//     cisco_top10k: false,
+//     cisco_top20k: false,
+//     cisco_top5k: false,
+//     cloudflare: false,
+//     "common-contact-emails": false,
+//     "common-artifact-false-positive": false,
+//     covid: false,
+//     "covid-19-cyber-threat-coalition-whitelist": false,
+//     "covid-19-krassi-whitelist": false,
+//     "crl-hostname": false,
+//     "crl-ip": false,
+//     dax30: false,
+//     digitalside: false,
+//     "disposable-email": false,
+//     "dynamic-dns": false,
+//     "eicar.com": false,
+//     "empty-hashes": false,
+//     fastly: false,
+//     "findip-host": false,
+//     google: false,
+//     "google-chrome-crux-1million": false,
+//     "google-gcp": false,
+//     "google-gmail-sending-ips": false,
+//     googlebot: false,
+//     "ipv6-linklocal": false,
+//     majestic_million: false,
+//     majestic_million_1M: false,
+//     microsoft: false,
+//     "microsoft-attack-simulator": false,
+//     "microsoft-azure": false,
+//     "microsoft-azure-appid": false,
+//     "microsoft-azure-china": false,
+//     "microsoft-azure-germany": false,
+//     "microsoft-azure-us-gov": false,
+//     "microsoft-office365": false,
+//     "microsoft-office365-cn": false,
+//     "microsoft-office365-ip": false,
+//     "microsoft-win10-connection-endpoints": false,
+//     "moz-top500": false,
+//     "mozilla-CA": false,
+//     "mozilla-IntermediateCA": false,
+//     multicast: false,
+//     "nartifact-filehash": false,
+//     "openai-gptbot": false,
+//     "ovh-cluster": false,
+//     "parking-domain": false,
+//     "parking-domain-ns": false,
+//     phone_numbers: false,
+//     "public-dns-hostname": false,
+//     "public-dns-v4": false,
+//     "public-dns-v6": false,
+//     "public-ipfs-gateways": false,
+//     rfc1918: false,
+//     rfc3849: false,
+//     rfc5735: false,
+//     rfc6598: false,
+//     rfc6761: false,
+//     "second-level-tlds": false,
+//     "security-provider-blogpost": false,
+//     sinkholes: false,
+//     "smtp-receiving-ips": false,
+//     "smtp-sending-ips": false,
+//     stackpath: false,
+//     "tenable-cloud-ipv4": false,
+//     "tenable-cloud-ipv6": false,
+//     "ti-falsepositives": false,
+//     tlds: false,
+//     tranco: false,
+//     tranco10k: false,
+//     "umbrella-blockpage-hostname": false,
+//     "umbrella-blockpage-v4": false,
+//     "umbrella-blockpage-v6": false,
+//     university_domains: false,
+//     "url-shortener": false,
+//     "vpn-ipv4": false,
+//     "vpn-ipv6": false,
+//     "whats-my-ip": false,
+//     wikimedia: false,
+//     zscaler: false,
+//   },
+//   last_updated: "2023-12-24T23:18:13.793Z",
+//   first_seen: "2021-06-09T23:34:03.000Z",
+//   last_seen: "2023-07-06T04:45:56.000Z",
+// });

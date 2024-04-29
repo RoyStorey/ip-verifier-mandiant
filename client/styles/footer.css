@@ -4,11 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fcffff;
+  background-color: hsl(207, 18%, 10%);
   position: fixed;
   left: 0px;
   bottom: 0px;
   margin: 0px;
+  border-top: 1px hsl(207, 18%, 25%) solid;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
 }/*# sourceMappingURL=footer.css.map */

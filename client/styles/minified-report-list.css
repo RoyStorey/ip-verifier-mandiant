@@ -18,12 +18,12 @@ a {
 }
 
 .header {
-  background: #f3fafa !important;
   position: sticky;
   display: flex;
   flex-direction: row;
   padding-inline: 4rem;
   align-items: center;
+  border-block: 1px solid hsl(207, 18%, 25%);
 }
 .header p {
   display: flex;
@@ -40,7 +40,7 @@ a {
   padding-inline: 4rem;
   box-sizing: border-box;
   transition-duration: 0.2s;
-  border-bottom: 1px solid #d8dfe4;
+  border-bottom: 1px solid hsl(207, 18%, 25%);
   height: 3rem;
 }
 .report .report-name {
@@ -73,22 +73,14 @@ a {
   color: #98c1d9;
 }
 
-.report:nth-of-type(odd) {
-  background: hsla(0, 0%, 100%, 0.01);
-}
-
-.report:nth-of-type(even) {
-  background: hsla(0, 0%, 100%, 0.01);
-}
-
 .report:hover {
-  background-color: #d8dfe4;
+  background-color: #636f7e;
   transition-duration: 0.2s;
   cursor: pointer;
 }
 
 .low-threat {
-  color: hsl(207, 18%, 5%);
+  color: #f3fafa;
 }
 
 .mid-threat {

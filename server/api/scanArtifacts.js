@@ -1,10 +1,9 @@
-import getArtifactFromMandiant from "../api/getArtifactFromMandiant.js";
+import getArtifactFromMandiant from "./getArtifactFromMandiant.js";
 ("../api/getArtifactFromMandiant.js");
-import getArtifactFromDatabase from "../api/getArtifactFromDatabase.js";
-import saveArtifactToDatabase from "../api/saveArtifactToDatabase.js";
-import saveReportToDatabase from "../api/saveReportToDatabase.js";
+import getArtifactFromDatabase from "./getArtifactFromDatabase.js";
+import saveArtifactToDatabase from "./saveArtifactToDatabase.js";
 
-async function scanArtifacts(listOfArtifacts) {
+export default async function scanArtifacts(listOfArtifacts) {
   let highest_mscore = 0;
   let scannedArtifacts = [];
 
@@ -49,18 +48,3 @@ async function scanArtifacts(listOfArtifacts) {
   }
   return { scannedArtifacts: scannedArtifacts, highest_mscore: highest_mscore };
 }
-
-export default async function saveReport(listOfArtifacts) {
-  console.log(listOfArtifacts, "listOfArtifacts");
-  let scannedArtifactsData = await scanArtifacts(listOfArtifacts);
-  let reportData = {
-    name: new Date().toDateString() + " Report",
-    highest_mscore: scannedArtifactsData.highest_mscore,
-    date: new Date(),
-    artifacts: listOfArtifacts,
-  };
-
-  saveReportToDatabase(reportData);
-}
-
-// saveReport(["8.8.8.8", "16.16.16.16", "98.109.16.51"]);

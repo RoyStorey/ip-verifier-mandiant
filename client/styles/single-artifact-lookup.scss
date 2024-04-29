@@ -1,22 +1,21 @@
-// $darkest: hsl(207, 18%, 5%);
-// $darker: hsl(207, 18%, 22%);
-// $dark: #636f7e;
-// $light: #d8dfe4;
-// $lighter: #f3fafa;
-// $highlight: #98c1d9;
-
-$darkest: #f3fafa;
-$darker: #d8dfe4;
+$darkest: hsl(207, 18%, 10%);
+$darker: hsl(207, 18%, 25%);
 $dark: #636f7e;
-$light: hsl(207, 18%, 22%);
-$lighter: hsl(207, 18%, 5%);
+$light: #d8dfe4;
+$lighter: #f3fafa;
 $highlight: #98c1d9;
+
+// $darkest: #f3fafa;
+// $darker: #d8dfe4;
+// $dark: #636f7e;
+// $light: hsl(207, 18%, 22%);
+// $lighter: hsl(207, 18%, 5%);
+// $highlight: #98c1d9;
 
 .whole {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  height: 100%;
 }
 .half {
   display: flex;
@@ -27,11 +26,10 @@ $highlight: #98c1d9;
     flex: 1;
   }
 }
-.single-ip-lookup {
+.single-artifact-lookup {
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
-  background: hsla(0, 0%, 100%, 0.01);
   flex: 1;
   gap: 1rem;
   a {
@@ -55,7 +53,8 @@ $highlight: #98c1d9;
 .form {
   width: 100%;
   display: flex;
-  gap: 1rem;
+  border: 1px solid $darker;
+  border-radius: 4px;
 }
 input {
   display: flex;
@@ -63,9 +62,7 @@ input {
   background: $darkest;
   border: 1px solid $darker;
   height: 2rem;
-  //   color: white;
   border-radius: 4px;
-  padding-inline: 1rem;
   box-sizing: border-box;
 }
 .block {
@@ -92,4 +89,14 @@ input {
 .list {
   display: flex;
   flex-direction: column;
+}
+
+#source-source-data {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.block-title {
+  margin-bottom: 1rem !important;
+  font-weight: 600;
 }

@@ -1,16 +1,14 @@
-import scanIpList from "./scanIpList.js";
+// import scanIpList from "./scanArtifacts.js";
 import saveReport from "./saveReport.js";
 
 const handleFileUpload = async (req, res) => {
-  const ipAddresses = req.body.ips;
-  console.log("Received IP Addresses:", ipAddresses);
-  let ipData = await scanIpList(ipAddresses);
-
-  saveReport(ipData);
-
+  const artifacts = req.body.artifacts;
+  // console.log(artifacts);
+  // let artifactData = await scanIpList(artifacts);
+  saveReport(artifacts);
   res.send({
-    message: "IP Addresses processed successfully.",
-    data: ipData,
+    message: "Artifacts processed successfully.",
+    // data: artifacts,
   });
 };
 

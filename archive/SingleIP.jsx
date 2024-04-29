@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../client/components/Navbar";
+import Footer from "../client/components/Footer";
 // import AnonymityPanel from "../components/AnonymityPanel";
 import { useParams } from "react-router-dom";
-import formatDate from "../functions/formatDate";
+import formatDate from "../client/functions/formatDate";
 import "../styles/single-ip.css";
 
 const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
@@ -33,7 +33,7 @@ export default function SingleIP() {
 
   useEffect(() => {
     fetchIp(ip).then((data) => {
-      console.log(data);
+      // console.log(data);
       setIpData(data[0]);
       setAnonymity(data[0].anonymity);
       setBlacklists(data[0].blacklists);
@@ -156,7 +156,6 @@ export default function SingleIP() {
           </div>
         </div>
       </div>
-
       <Footer />
     </>
   );
