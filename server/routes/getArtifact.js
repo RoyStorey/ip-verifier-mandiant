@@ -14,7 +14,7 @@ const getArtifact = async (req, res) => {
   `;
 
     const { rows } = await client.query(query, [artifact]);
-    console.log(rows, "rows", rows.length);
+    // console.log(rows, "rows", rows.length);
     if (rows.length === 0) {
       let scannedArtifact = await scanArtifacts([artifact]);
       res.json(scannedArtifact.scannedArtifacts[0]);
