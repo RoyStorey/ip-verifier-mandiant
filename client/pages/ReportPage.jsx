@@ -119,7 +119,11 @@ export default function ReportPage() {
 
         <div className="ip-report">
           {/* <ReportData artifacts={artifacts} /> */}
-          <ListOfArtifacts artifacts={artifacts} />
+          {artifacts.length > 0 ? (
+            <ListOfArtifacts artifacts={artifacts} />
+          ) : (
+            <p>Loading Artifacts..</p>
+          )}
         </div>
       </div>
       <Footer />

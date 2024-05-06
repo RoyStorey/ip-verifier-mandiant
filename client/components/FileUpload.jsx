@@ -9,6 +9,7 @@ const PORT = import.meta.env.VITE_PORT;
 const FileUpload = () => {
   const [data, setData] = useState([]);
   const [file, setFile] = useState(null);
+  const [parseStatus, setParseStatus] = useState("Parse");
 
   const handleFileChange = (e) => {
     if (e.target.files.length) {
@@ -23,12 +24,12 @@ const FileUpload = () => {
       return;
     }
 
-    const reader = new FileReader();
+    setParseStatus("Parsing, please wait..");
 
+    const reader = new FileReader();
     reader.onload = async (e) => {
       const text = e.target.result;
       const lines = text.split("\n");
-
       const parsedData = lines.map((line) => {
         return line.trim();
       });
@@ -85,7 +86,11 @@ const FileUpload = () => {
       .post(`http://${SERVER_HOST}:${PORT}/handleFileUpload`, {
         artifacts: artifacts,
       })
-      .then((response) => response.data)
+      .then((response) => {
+        response.data;
+        console.log("test!");
+        setParseStatus("Parsed!");
+      })
       .catch((error) => console.error(error));
   }
 
@@ -112,7 +117,7 @@ const FileUpload = () => {
         />
       </label>
       <button onClick={handleParse}>
-        <p>Parse</p>
+        <p>{parseStatus}</p>
       </button>
     </div>
   );
